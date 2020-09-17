@@ -1,0 +1,27 @@
+extends layout
+
+block content
+  .container.mt-5
+    .content
+      h1.text-center Sign in to your account
+      .content
+        hr
+        form#login-form.form-hoizontal.sign-form(method="POST", action="/login")
+          .form-group
+            input#email.form-control(type='email', autofocus='autofocus', placeholder='Email Address', name="email")
+            .invalid-feedback Please provide a valid email address.
+            // 
+          .form-group
+            input#password.form-control(type='password', placeholder='Password', name="password")
+            .invalid-feedback Please enter your password.
+            // 
+          .form-group
+            input#remember(type='checkbox', name='rememberMe')
+            label(for='remember') Remember Me
+          // 
+          .form-group
+            button.btn.ajax-button.btn-dark.btn-lg.btn-block(type='submit')
+              span.button-text Sign in
+            // 
+          p.text-center
+            a(href='/password/forgot') Forgot your password? 

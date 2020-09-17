@@ -1,0 +1,43 @@
+extends layout
+
+block content
+  .container.mt-5
+    h1.text-center Create an account
+    .content
+      p.text-center Let's get started! Becoming a member is free and only takes a few minutes.
+      hr
+      form#sign-up.ajax-form(action="/signup" method="POST")
+        .form-group
+          label(for='first-name') First name
+          input#first-name.form-control(autofocus='autofocus', type='text', placeholder='Sturgis', name="firstName", required)
+          // 
+        .form-group
+          label(for='last-name') Last name
+          input#last-name.form-control(autofocus='autofocus', type='text', placeholder='P. Sturgeon', name="lastName", required)
+          //
+        .form-group
+          label(for='email-address') Email address
+          input#email-address.form-control(type='email', placeholder='sturgeon@example.com', name="email", value=email, required)
+          // 
+        .form-group
+          label(for='password') Choose a password
+          input#password.form-control(type='password', placeholder='••••••••', name="password", required)
+          // 
+        .form-group
+          label(for='confirm-password') Confirm password
+          input#confirm-password.form-control(type='password', placeholder='••••••••' name="confirmPassword", required)
+          // 
+        .form-group.form-check
+          label.form-check-label(for='terms-agreement')
+            input#terms-agreement.form-check-input(type='checkbox')
+            |  I have read & agree to the 
+            a(target='_blank', href='/terms') terms of service
+            | .
+        // 
+        .form-group
+          button.btn.ajax-button.btn-dark.btn-lg.btn-block(type='submit')
+            span.button-text Create account
+            // 
+      p.text-center
+        | Have an account? 
+        a(href='/login') Sign in

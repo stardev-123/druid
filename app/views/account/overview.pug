@@ -1,0 +1,75 @@
+extends ../layout
+
+block content
+  .container.mt-5
+    h1 My account
+    hr
+    .row.mb-3
+      .col-sm-6
+        h4 Personal information
+      .col-sm-6
+        span.float-sm-right
+          a.btn.btn-sm.btn-outline-info.account-settings-button(href='/account/profile') Edit profile
+    .row
+      .col-3 Name:
+      .col
+        input.input-disable(value = user.first_name+' '+user.last_name readonly disabled)  
+    .row
+      .col-3 Email:
+      .col
+        input#email.input-disable(value = user.email_address readonly disabled)
+    hr
+    .row.mb-3
+      .col-sm-6
+        h4 Password
+      .col-sm-6
+        span.float-sm-right
+          a.btn.btn-sm.btn-outline-info.account-settings-button(href='/account/password') Change password
+    .row
+      .col-3 Password:
+      .col
+        strong ••••••••••
+    hr
+    .row.mb-3
+      .col-sm-6
+      
+        h4 Billing
+      .col-sm-6
+        span.float-sm-right
+          if user.card_number
+            button#addCard.btn.btn-sm.btn-outline-info.account-settings-button Change Card
+          else 
+            button#addCard.btn.btn-sm.btn-outline-info.account-settings-button Add Card
+    if user.card_number
+      div
+      .row#credit-card
+        .col-3 Credit card:
+        .col
+          | Visa ending in 
+          input.col-md-2.input-disable(value = user.card_number readonly disabled style="width:8%")
+          a.remove-button.ml-2.input-disable(data-toggle='modal', data-target='#removeCard') Remove
+      .row
+        .col-3 Expiration:
+        .col 
+          input.input-disable(value = user.card_exp readonly disabled)
+    if user.card_number == ''
+      .alert.alert-secondary
+        | You have not linked a payment source to your account. In order to access paid features, you'll need to provide your credit card information. (Don't worry: you will only be charged when you've reached the limit of your free plan.)
+    if user.card_number !== null
+      #removeCard.modal.fade
+        .modal-dialog
+          .modal-content
+            .modal-header
+              h5#exampleModalLabel.modal-title Remove Card Info?
+              button.close(type='button', data-dismiss='modal', aria-label='Close')
+                span(aria-hidden='true') ×
+            .modal-body
+              p
+                | Are you sure you want to remove your Visa ending in 
+                input.input-disable(value=user.card_number ? user.card_number: '' readonly disabled style="width: 10%;")
+                | ?
+              p.text-muted This may restrict your access to paid features.
+            .modal-footer
+              button.btn.btn-outline-info(type='button', data-dismiss='modal') Nevermind
+              button#remove.btn.btn-primary(type='button') Remove
+    script(type='text/javascript', src='/javascripts/billings.js')

@@ -1,0 +1,24 @@
+extends ./layout
+
+block content
+  div(style="display: flex; margin: 30px; text-align: center; justify-content: center;")
+    select#month.browser-default.custom-select.col-md-2.mr-3(name='month')
+      option(value='', disabled='', selected='') Month
+      option(value='0') January
+      option(value='1') Feburary
+      option(value='2') March
+      option(value='3') April
+      option(value='4') May
+      option(value='5') June
+      option(value='6') July
+      option(value='7') August
+      option(value='8') September
+      option(value='9') October
+      option(value='10') November
+      option(value='11') December
+    select#year.browser-default.custom-select.col-md-1.mr-3(name='year')      
+    button.btn.btn-primary(id='report' style="float: right;" onClick="getData()") Get data
+  .container
+    .ct-chart.ct-perfect-fourth
+    input#curmonth(type="hidden" value = month)
+  script(type='text/javascript', src='/javascripts/report.js')

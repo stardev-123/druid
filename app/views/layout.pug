@@ -1,0 +1,93 @@
+doctype html
+html
+  head
+    title= title || 'Druid App'
+    //- Viewport tag for sensible mobile support
+    meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
+    //- if process.env.NODE_ENV === 'production'
+    //- Google Analytics, Google Tag Manager, etc.
+    meta(name='robots', content='noindex')
+    link(rel='stylesheet', href='https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css')
+    link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css", integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh", crossorigin="anonymous")
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css', integrity='sha256-h20CPZ0QyXlBuAw7A+KluUYx/3pK+c7lYEpqLTlxjYQ=', crossorigin='anonymous') 
+    link(rel='stylesheet', href='https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css')
+    link(rel='stylesheet', href='/stylesheets/style.css')
+
+    script(type='text/javascript', src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js')
+    script(type='text/javascript', src='https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js')
+    script(type='text/javascript', src='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js')
+    script(type='text/javascript', src='https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js')
+    script(type='text/javascript', src='https://cdn.jsdelivr.net/npm/sweetalert2@9')
+    script(type='text/javascript', src='https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js')
+    script(type='text/javascript', src='https://js.stripe.com/v3')
+    script(type='text/javascript', src='https://checkout.stripe.com/checkout.js')
+    script(type='text/javascript', src='https://cdn.jsdelivr.net/npm/vue@2.6.11')
+    script(type='text/javascript', src='/javascripts/users.js')
+    script(type='text/javascript', src='/javascripts/account.js')
+  body
+    #page-wrap
+      header#page-header.navbar.navbar-expand-sm.navbar-dark.bg-dark.flex-column.flex-md-row.justify-content-between
+        .navbar-nav.flex-row
+          a.navbar-brand.mr-0(href='/')
+            img.logo(alt='Druid logo', src='/images/logo.svg')
+          //- LOGGED-IN NAVIGATION
+          if user && user.role
+            a.nav-item.nav-link.ml-2.ml-md-0.mr-2.mr-md-0(href='/tests') My Tests
+          if user && user.role == 'admin'
+            a.nav-item.nav-link.ml-2.ml-md-0.mr-2.mr-md-0(href='/users') Users
+            a.nav-item.nav-link.ml-2.ml-md-0.mr-2.mr-md-0(href='/reports') Reporting
+        .navbar-nav.flex-row
+          //- LOGGED-IN NAVIGATION
+          if user
+            //- a.nav-item.nav-link.ml-2.ml-md-0.mr-2.mr-md-0(href='mailto:support@druidapp.com') Help
+            //- Only in desktop nav
+            .nav-item.dropdown.d-none.d-sm-block
+              a#header-account-menu-link.nav-link.dropdown-toggle(data-toggle='dropdown', aria-haspopup='true', aria-expanded='false') Account
+              .dropdown-menu.account-menu(aria-labelledby='header-account-menu-link')
+                a.dropdown-item(href='/account') Settings
+                a.dropdown-item(href='/logout') Sign out
+            //- Only in mobile nav
+            a.nav-item.nav-link.ml-2.mr-2.d-block.d-sm-none(href='/account') Account Settings
+            a.nav-item.nav-link.ml-2.mr-2.d-block.d-sm-none(href='/logout') Sign out
+          else
+            //- LOGGED-OUT NAVIGATION
+            a.nav-item.nav-link.ml-2.ml-md-0.mr-2(href='/faq') FAQ
+            a.nav-item.nav-link.ml-2.ml-md-0.mr-2(href='/login') Log in
+            //- Only in desktop nav
+            .form-inline.d-none.ml-2.d-md-block
+              a.btn.btn-outline-info(href='/signup') Sign up
+            //- Only in mobile nav
+            a.nav-item.nav-link.text-info.ml-2.d-block.d-md-none(href='/signup') Sign up
+      //- Alert if email has not been confirmed
+      if user && user.emailChangeCandidate
+        .container-fluid
+          .alert.alert-secondary.mt-2(role='alert') Your updated email address needs verification. Until you click the link sent to 
+            strong= role.emailChangeCandidate
+            | , you'll still need to sign in as 
+            strong= role.emailAddress
+            | .
+      else if user && user.emailStatus === 'unconfirmed'
+        .container-fluid
+          .alert.alert-secondary.mt-2(role='alert') Your email address still needs verification. Your account access may be limited until you click the link sent to 
+            strong= role.emailChangeCandidate ? role.emailChangeCandidate : user.email
+            | .
+      div#content-wrap
+        block content
+      footer#page-footer.navbar.navbar-light.justify-content-between.flex-row-reverse
+        .nav
+          small.nav-item
+            a.nav-link.text-info(href='mailto:support@druidapp.com') Contact
+              span.d-none.d-sm-inline  us
+          small.nav-item
+            a.nav-link.text-info(href='/legal/terms') Terms
+              span.d-none.d-sm-inline  of use
+          small.nav-item
+            a.nav-link.text-info(href='/legal/privacy') Privacy
+              span.d-none.d-sm-inline  policy
+          if role
+            small.nav-item
+              a.nav-link.text-info(href='/logout') Sign out
+        small.copy Copyright © 2020 
+          a(target='_blank', href='/') Impairment Sciences, Inc.
+          br
+          .xs-only All rights reserved.

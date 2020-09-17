@@ -1,0 +1,59 @@
+extends layout
+
+block content
+	.container.mt-5
+		#userInvite
+			button.btn.btn-success.btn-sm(data-toggle='modal', data-target='#invite')
+				i.fa.fa-user-plus
+				|  Invite User
+		table#userList.display(style='width:100%')
+		#invite.modal.fade
+			.modal-dialog
+				.modal-content
+					// Modal Header
+					.modal-header
+						h4.modal-title Invite User
+						button.close(type="button" data-dismiss="modal") &times;
+					// Modal body
+					.md-form.modal-body.invite-form
+						label(data-error="wrong" data-success="right" for="defaultForm-email") Email:
+						input#email.form-control.col-md-6(type="email" placeholder="Enter the email")
+						
+					// Modal footer
+					.modal-footer
+						button.btn.btn-success(type="button" id='btnInvite') Invite
+						button.btn.btn-danger(type="button" data-dismiss="modal") Close
+
+		#user_detail.modal.fade.popUpMessage(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
+			.modal-dialog(role='document')
+				.modal-content
+					.modal-header.text-center
+						h4.modal-title.w-100.font-weight-bold User Detail Info
+						button.close(type='button', data-dismiss='modal', aria-label='Close')
+							span(aria-hidden='true') ×
+					.modal-body.mx-3
+						.md-form.mb-5
+							i.fas.fa-user.prefix.grey-text.pr-3
+							label(data-error="wrong" data-success="right") First Name
+							input#first-name.form-control.validate(type='text')
+						.md-form.mb-5
+							i.fas.fa-user.prefix.grey-text.pr-3
+							label(data-error="wrong" data-success="right") Last Name
+							input#last-name.form-control.validate(type='text')
+						.md-form.mb-5
+							i.fas.fa-envelope.prefix.grey-text.pr-3
+							label(data-error="wrong" data-success="right") Email
+							input#detail-email.form-control.validate(type='email')
+						.md-form.mb-5
+							label(data-error="wrong" data-success="right") Staus:
+							i.fas.fa-status.prefix.grey-text
+							select#status.browser-default.custom-select(name='status')
+								option(value='', disabled='', selected='') Choose Status
+								option(value='0') Pending
+								option(value='1') Confirmed
+								option(value='2') Suspend
+								option(value='3') Invited
+					.modal-footer.d-flex.justify-content-center
+						button.btn.btn-primary(id='btnUserInfoSave') Save
+						button.btn.btn-danger(type='button', data-dismiss='modal') Cancel
+					input#user-id(type='hidden', value='')

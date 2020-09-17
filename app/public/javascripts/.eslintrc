@@ -1,0 +1,22 @@
+// add rule overrides as needed.
+{
+  "parserOptions": {
+    "ecmaVersion": 2017,
+    "sourceType": "script",
+    "ecmaFeatures": {
+    }
+  },
+  "extends": "airbnb-base",
+  "rules": {
+    "no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
+    "arrow-parens": ["error", "as-needed"],
+    "object-curly-newline": ["error", {
+      "ObjectPattern": "never"
+    }],
+    "no-console": ["off"]
+  },
+  "env": {
+    "browser" : true,
+    "jquery": true
+  }
+}

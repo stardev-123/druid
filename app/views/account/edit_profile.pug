@@ -1,0 +1,27 @@
+extends ../layout
+
+block content
+  .container.mt-5
+    h1 Update personal info
+    hr
+    form#edit-profile.ajax-form(method="POST", action="/account/update-profile" data-toggle="validator")
+      .row
+        .col-sm-3
+          .form-group
+            label(for='first-name') First name
+            input#first-name.form-control(name='firstName', type='text', placeholder='Sturgis', value=user.first_name)
+        .col-sm-3
+          .form-group
+            label(for='last-name') Last name
+            input#last-name.form-control(name='lastName', type='text', placeholder='P. Sturgeon', value=user.last_name)
+        .col-sm-6
+          .form-group
+            label(for='email-address') Email address
+            input#email-address.form-control(name='emailAddress', type='email', placeholder='sturgeon@example.com', value=user.email_address)
+      .row
+        .col-sm-6
+        .col-sm-6
+          .form-group.text-right
+            a.btn.btn-outline-info.mr-2(href='/account') Cancel
+            button.btn.ajax-button.btn.btn-dark(type='submit')
+              span.button-text Save changes

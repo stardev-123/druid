@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="100%" height="100%" viewBox="0 0 324 108" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 57.1 (83088) - https://sketch.com -->
+    <title>DRUID Console</title>
+    <desc>DRUID management console</desc>
+    <defs>
+        <rect id="icon-path" x="0" y="0" width="54" height="27"></rect>
+    </defs>
+    <g id="DRUID-logo-outer" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="DRUID-logo-transform" transform="translate(-83, -1104)">
+            <g id="DRUID-logo-Inner" transform="translate(83, 1104)">
+                <rect id="DRUID-logo-rect" x="0" y="0" width="324" height="108"></rect>
+
+                <g id="DRUID-logo-Icon-Box" transform="translate(23, 14)">
+                    <g id="DRUID-logo-Icon-Group">
+						<!-- Draw 4 triangles to fill in inside the Ds with green,
+							 but not the space between the "links" 
+						-->
+						<g id="DRUID-icon-fill" transform="translate(13, 23)" fill="#3ea95d">
+							<polygon points=" 0  0, 11  2,  0 28" /> <!-- upper left -->
+							<polygon points=" 0 34, 11 33,  0  8" /> <!-- lower left -->
+							<polygon points="29  0, 19  2, 29 28" /> <!-- upper right -->
+							<polygon points="29 34, 19 33, 29  8" /> <!-- lower right -->
+						</g>
+					
+						<!-- Draw 2 D's, one forward and one backward -->
+						<text id="DRUID-icon-D-forward" stroke="#62D174" stroke-width="2" 
+							  font-family="Futura PT Medium, Futura, Open Sans, Nunito, sans-serif" 
+							  font-size="66" font-weight="400">
+							<tspan x="0" y="64">D</tspan>
+						</text>
+						<text id="DRUID-icon-D-backward" stroke="#62D174" stroke-width="2" 
+							  transform="translate(34, 40) scale(-1, 1) translate(-34, -40)" 
+							  font-family="Futura PT Medium, Futura, Open Sans, Nunito, sans-serif" 
+							  font-size="66" font-weight="400">
+							<tspan x="14" y="64">D</tspan>
+						</text>
+						
+						<!-- Interleave the two D's -->
+						<g id="DRUID-icon-box" transform="translate(0, 13)">
+							<mask id="DRUID-icon-mask" fill="white">
+								<use xlink:href="#icon-path"></use>
+							</mask>
+							<use id="Mask" fill="#D8D8D8" opacity="0" xlink:href="#icon-path"></use>
+							<text stroke="#62D174" stroke-width="2" mask="url(#DRUID-icon-mask)" 
+								  font-family="Futura PT Medium, Futura, Open Sans, Nunito, sans-serif" 
+								  font-size="66" font-weight="400">
+								<tspan x="0" y="51">D</tspan>
+							</text>
+						</g>
+                    </g>
+                    <text id="DRUID" 
+						  font-family="Futura PT Heavy, Futura, Open Sans, Nunito, sans-serif" 
+						  font-size="62" font-weight="600" fill="#fff">
+                        <tspan x="78" y="62">DRUID</tspan>
+                    </text>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
